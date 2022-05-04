@@ -1,26 +1,30 @@
 const { app } = require('./app');
 
 // Models
-const { Repairs } = require('./models/repairs.model');
-const { User } = require('./models/user.model');
+const { Repair } = require('./models/repairs.model');
+const { User } = require('./models/users.model');
 
 // Utils
 const { db } = require('./utils/database');
 
+
+
 // Authenticate database credentials
 db.authenticate()
-  .then(() => console.log('Database authenticated'))
+  .then(() => console.log('Login Sucess!'))
   .catch(err => console.log(err));
 
 // Establish models relations
 
 // 1 User <----> M Post
 // User.hasMany(Post, { foreignKey: 'userId' });
-User.hasMany(Repairs);
-Repairs.belongsTo(User);
+User.hasMany(Repair);
+Repair.belongsTo(User);
 
 // Sync sequelize models
-db.sync()
+db.sync(
+  // {force: true}
+)
   .then(() => console.log('Database synced'))
   .catch(err => console.log(err));
 

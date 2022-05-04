@@ -1,5 +1,12 @@
 const express = require('express');
 
+// Middlewares
+const { repairExist } = require('../middlewares/repairs.middlewares');
+const {
+  createRepairsValidation,
+  checkValidations,
+} = require('../middlewares/validations.middlewares');
+
 //controllers
 const {
   getAllPendings,
@@ -15,7 +22,7 @@ const router = express.Router();
 //Functions
 router.route(`/`)
     .get( getAllPendings)
-    .post( createPending);
+    .post( createRepairsValidation, checkValidations, createPending);
 
 router.route(`/:id`)
     .get(getPendingById)

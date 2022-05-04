@@ -1,5 +1,5 @@
 // Models
-const { User } = require('../models/user.model');
+const { User } = require('../models/users.model');
 
 // Utils
 const { catchAsync } = require('../utils/catchAsync');

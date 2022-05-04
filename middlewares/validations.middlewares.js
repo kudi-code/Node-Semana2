@@ -15,10 +15,10 @@ const createUserValidations = [
 ];
 
 const createRepairsValidation = [
-    body('Date').isDate().withMessage('Date must have a format: YYYY:MM:DD'),
+    // body('Date').isLength({min: 10, max: 10}).withMessage('Date must have a format: YYYY-MM-DD and '),
     body('computerNumber')
       .notEmpty()
-      .withMessage('Computer Number cannot be empty')
+      .withMessage('computerNumber cannot be empty')
       .isNumeric()
       .withMessage('Must be a number'),
     body('comments')

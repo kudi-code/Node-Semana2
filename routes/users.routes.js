@@ -1,5 +1,13 @@
 const express = require('express');
 
+// Middlewares
+const { userExists } = require('../middlewares/users.middlewares');
+const {
+  createUserValidations,
+  checkValidations,
+} = require('../middlewares/validations.middlewares');
+
+
 //controllers
 const {
   getAllUsers,
@@ -15,11 +23,11 @@ const router = express.Router();
 //Funciones Verbo
 router.get('/', getAllUsers);
 
-router.post('/', createUser);
+router.post('/', createUserValidations, checkValidations, createUser);
 
-router.get('/:id', getUserById)
-router.patch(':/id', updateUser)
-router.delete(':/id', deleteUser)
+router.get('/:id',userExists, getUserById)
+router.patch(':/id', userExists, updateUser)
+router.delete(':/id', userExists, deleteUser)
 
 
 //export default router es igual a:

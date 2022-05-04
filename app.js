@@ -1,16 +1,17 @@
 const express = require('express'); //Llamamos a express
+const cors = require('cors');
+
+// Controllers
+const { globalErrorHandler } = require('./controllers/errors.controller');
 
 //Routers
 const { usersRouter } = require('./routes/users.routes'); //Importamos users
 const { repairsRouter } = require('./routes/repairs.routes');
 
-// Controllers
-const { globalErrorHandler } = require('./controllers/errors.controller');
-
-//utils
-const { db } = require('./utils/database');
-
 const app = express(); //guardamos en app el express
+
+// Enable CORS
+app.use(cors());
 
 //Enable incoming JSON data
 app.use(express.json());
@@ -22,4 +23,5 @@ app.use('/api/v1/repairs', repairsRouter)
 
 app.use('*', globalErrorHandler);
 
-module.exports = {app}
+module.exports = { app };
+
